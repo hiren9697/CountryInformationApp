@@ -6,27 +6,29 @@
 //
 
 import SwiftUI
+import SDWebImageSwiftUI
 
 // MARK: - View
 struct CountryListItemView: View {
     
+    let country: CountryList
+    
     var body: some View {
         HStack() {
-            Image(systemName: "flag")
-            Text("Country name")
+            WebImage(url: country.flagURL)
+                .resizable()
+                .frame(width: 40, height: 30)
+            Text(country.name)
                 .font(.custom(AppFont.regular.rawValue,
                               size: 13))
                 .foregroundColor(AppColor.cPrimaryTextColor)
-            Spacer()
         }
-//        .listRowSeparator(.hidden)
-//        .listRowInsets(EdgeInsets(.zero))
     }
 }
 
 // MARK: - Preview
-struct CountryListItemView_Previews: PreviewProvider {
-    static var previews: some View {
-        CountryListItemView()
-    }
-}
+//struct CountryListItemView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        CountryListItemView(country: CountryList(dictionary: <#T##NSDictionary#>))
+//    }
+//}

@@ -8,6 +8,47 @@
 import Foundation
 import CoreLocation
 
+// MARK: - Country List
+struct CountryList: Mirrorable, Identifiable {
+    let id = UUID().uuidString
+    let name: String
+    let flagURLString: String?
+    let coordinates: CLLocationCoordinate2D?
+    
+    var flagURL: URL? {
+        guard let flagURLString = flagURLString else {
+            return nil
+        }
+        return URL(string: flagURLString)
+    }
+    
+    init(dictionary: NSDictionary) {
+        // 1. name
+        if let nameDictionary = dictionary["name"] as? NSDictionary {
+            name = nameDictionary.stringValue(key: "official")
+        } else {
+            name = "-"
+        }
+        // 2. Flag
+        if let flagDictionary = dictionary["flags"] as? NSDictionary {
+            flagURLString = flagDictionary.stringValue(key: "png")
+        } else {
+            flagURLString = nil
+        }
+        // 3. Coordinate
+        if let coordinateArray = dictionary["latlng"] as? [Double],
+           coordinateArray.count == 2 {
+            let latitude = coordinateArray[0]
+            let longitude = coordinateArray[1]
+            self.coordinates = CLLocationCoordinate2D(latitude: latitude,
+                                                      longitude: longitude)
+            
+        } else {
+            self.coordinates = nil
+        }
+    }
+}
+
 // MARK: - Currency
 struct Currency {
     let name: String
@@ -35,7 +76,7 @@ struct IDD {
 }
 
 // MARK: - Country
-struct Country: Mirrorable {
+struct CountryDetail: Mirrorable {
     let name: String
     let independent: Bool
     let currencies: [Currency]

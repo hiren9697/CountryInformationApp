@@ -6,22 +6,33 @@
 //
 
 import Foundation
+import Combine
+
+enum DataLoadNetworkServiceStatus {
+    case notAttempted
+    case finishedWithError
+    case finishedWithSuccess
+}
 
 class CountryListViewModel: ObservableObject {
     
     var appState: AppState!
     let service = CountryService()
+    var bag: Set<AnyCancellable> = Set()
+    @Published var countries: [CountryList] = []
+    @Published var dataLoadStatus: DataLoadNetworkServiceStatus = .notAttempted
     
     func setup(appState: AppState) {
         self.appState = appState
     }
     
     func fetchData() {
-        //service.fetchCountries()
         appState.isLoading = true
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3,
-                                      execute: {
-            self.appState.isLoading = false
+        service.fetchCountries(completion: {[weak self] countries in
+                guard let strongSelf = self else { return }
+                strongSelf.appState.isLoading = false
+                strongSelf.countries = countries
+                strongSelf.dataLoadStatus = .finishedWithSuccess
         })
     }
 }

@@ -10,21 +10,32 @@ import SwiftUI
 struct CountryListView: View {
     
     @EnvironmentObject var appState: AppState
-    var viewModel: CountryListViewModel = CountryListViewModel()
+    @StateObject var viewModel: CountryListViewModel = CountryListViewModel()
     
     var body: some View {
         NavigationStack(root: {
-            List {
-                ForEach(0 ..< 20,
-                        content: { index in
-                    CountryListItemView()
-                })
+            switch viewModel.dataLoadStatus {
+            case .notAttempted:
+                EmptyView()
+            case .finishedWithError:
+                Text("Something went wrong")
+            case .finishedWithSuccess:
+                if viewModel.countries.isEmpty {
+                    Text("No data found")
+                } else {
+                    List {
+                        ForEach(viewModel.countries,
+                                content: { country in
+                            CountryListItemView(country: country)
+                        })
+                    }
+                    .listStyle(.plain)
+                }
             }
-            .listStyle(.plain)
-            .onAppear(perform: {
-                viewModel.setup(appState: appState)
-                viewModel.fetchData()
-            })
+        })
+        .onAppear(perform: {
+            viewModel.setup(appState: appState)
+            viewModel.fetchData()
         })
     }
 }
