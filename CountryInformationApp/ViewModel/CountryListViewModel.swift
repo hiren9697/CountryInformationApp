@@ -7,11 +7,21 @@
 
 import Foundation
 
-class CountryListViewModel {
+class CountryListViewModel: ObservableObject {
     
+    var appState: AppState!
     let service = CountryService()
     
+    func setup(appState: AppState) {
+        self.appState = appState
+    }
+    
     func fetchData() {
-        service.fetchCountries()
+        //service.fetchCountries()
+        appState.isLoading = true
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3,
+                                      execute: {
+            self.appState.isLoading = false
+        })
     }
 }

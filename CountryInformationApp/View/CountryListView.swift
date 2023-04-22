@@ -9,12 +9,22 @@ import SwiftUI
 
 struct CountryListView: View {
     
-    let viewModel = CountryListViewModel()
+    @EnvironmentObject var appState: AppState
+    var viewModel: CountryListViewModel = CountryListViewModel()
     
     var body: some View {
         NavigationStack(root: {
-            Text("Hiren")
-                .font(.custom(AppFont.regular.rawValue, size: 19))
+            List {
+                ForEach(0 ..< 20,
+                        content: { index in
+                    CountryListItemView()
+                })
+            }
+            .listStyle(.plain)
+            .onAppear(perform: {
+                viewModel.setup(appState: appState)
+                viewModel.fetchData()
+            })
         })
     }
 }

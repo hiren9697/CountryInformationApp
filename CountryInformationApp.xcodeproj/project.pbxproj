@@ -43,6 +43,9 @@
 		87A5A69229F38E2C00A6A35C /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 87A5A67F29F38E2C00A6A35C /* Colors.xcassets */; };
 		87A5A69529F38EE300A6A35C /* AppFonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A5A69429F38EE300A6A35C /* AppFonts.swift */; };
 		87A5A69729F38F0700A6A35C /* AppColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A5A69629F38F0700A6A35C /* AppColors.swift */; };
+		87A5A69929F394F900A6A35C /* CountryListItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A5A69829F394F900A6A35C /* CountryListItemView.swift */; };
+		87A5A69B29F39A2B00A6A35C /* AppModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A5A69A29F39A2B00A6A35C /* AppModel.swift */; };
+		87A5A69D29F39AA800A6A35C /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A5A69C29F39AA800A6A35C /* LoadingView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -103,6 +106,9 @@
 		87A5A69329F38E9400A6A35C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		87A5A69429F38EE300A6A35C /* AppFonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFonts.swift; sourceTree = "<group>"; };
 		87A5A69629F38F0700A6A35C /* AppColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppColors.swift; sourceTree = "<group>"; };
+		87A5A69829F394F900A6A35C /* CountryListItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryListItemView.swift; sourceTree = "<group>"; };
+		87A5A69A29F39A2B00A6A35C /* AppModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppModel.swift; sourceTree = "<group>"; };
+		87A5A69C29F39AA800A6A35C /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -213,6 +219,8 @@
 			isa = PBXGroup;
 			children = (
 				873E852A29F22C1A0053EB40 /* CountryListView.swift */,
+				87A5A69829F394F900A6A35C /* CountryListItemView.swift */,
+				87A5A69C29F39AA800A6A35C /* LoadingView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -221,6 +229,7 @@
 			isa = PBXGroup;
 			children = (
 				87A5A66629F3590E00A6A35C /* CountryModel.swift */,
+				87A5A69A29F39A2B00A6A35C /* AppModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -429,12 +438,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				87A5A69929F394F900A6A35C /* CountryListItemView.swift in Sources */,
 				873E852D29F22C790053EB40 /* CountryService.swift in Sources */,
 				87A5A66929F3597900A6A35C /* NSDictionary+Extension.swift in Sources */,
 				873E852F29F230360053EB40 /* CustomErrors.swift in Sources */,
 				87A5A66729F3590E00A6A35C /* CountryModel.swift in Sources */,
 				87A5A66329F3565500A6A35C /* Log.swift in Sources */,
 				873E84FC29F226F60053EB40 /* ContentView.swift in Sources */,
+				87A5A69B29F39A2B00A6A35C /* AppModel.swift in Sources */,
+				87A5A69D29F39AA800A6A35C /* LoadingView.swift in Sources */,
 				87A5A66B29F382DA00A6A35C /* Mirror.swift in Sources */,
 				873E84FA29F226F60053EB40 /* CountryInformationAppApp.swift in Sources */,
 				87A5A69529F38EE300A6A35C /* AppFonts.swift in Sources */,

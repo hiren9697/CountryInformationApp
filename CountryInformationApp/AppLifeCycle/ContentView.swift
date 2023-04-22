@@ -8,8 +8,19 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @StateObject var appState = AppState()
+    
     var body: some View {
-        CountryListView()
+        ZStack {
+            // 1. App Content
+            CountryListView()
+                .environmentObject(appState)
+            // 2. Loader
+            if appState.isLoading {
+            LoadingView()
+            }
+        }
     }
 }
 
