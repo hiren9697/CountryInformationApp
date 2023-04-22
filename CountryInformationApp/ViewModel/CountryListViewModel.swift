@@ -8,19 +8,37 @@
 import Foundation
 import Combine
 
-enum DataLoadNetworkServiceStatus {
-    case notAttempted
-    case finishedWithError
-    case finishedWithSuccess
+// MARK: - List Item View Model
+struct CountryListItemViewModel: Identifiable {
+    let id = UUID().uuidString
+    let name: String
+    let flagURL: URL?
+    
+    init(country: CountryList) {
+        name = country.name
+        flagURL = country.flagURL
+    }
 }
 
+// MARK: - List View Model
 class CountryListViewModel: ObservableObject {
     
     var appState: AppState!
     let service = CountryService()
     var bag: Set<AnyCancellable> = Set()
     @Published var countries: [CountryList] = []
+    @Published var countryListeItemVMs: [CountryListItemViewModel] = []
     @Published var dataLoadStatus: DataLoadNetworkServiceStatus = .notAttempted
+    @Published var searchText = ""
+    var searchCountryListVMs: [CountryListItemViewModel] {
+        let trimmedString = searchText.trimmingCharacters(in: .whitespacesAndNewlines)
+        if trimmedString.isEmpty {
+            return countryListeItemVMs
+        } else {
+            let lowercasedSearchText = searchText.lowercased()
+            return countryListeItemVMs.filter({ $0.name.lowercased().contains(lowercasedSearchText) })
+        }
+    }
     
     func setup(appState: AppState) {
         self.appState = appState
@@ -29,10 +47,11 @@ class CountryListViewModel: ObservableObject {
     func fetchData() {
         appState.isLoading = true
         service.fetchCountries(completion: {[weak self] countries in
-                guard let strongSelf = self else { return }
-                strongSelf.appState.isLoading = false
-                strongSelf.countries = countries
-                strongSelf.dataLoadStatus = .finishedWithSuccess
+            guard let strongSelf = self else { return }
+            strongSelf.appState.isLoading = false
+            strongSelf.countries = countries
+            strongSelf.countryListeItemVMs = strongSelf.countries.map { CountryListItemViewModel(country: $0) }
+            strongSelf.dataLoadStatus = .finishedWithSuccess
         })
     }
 }

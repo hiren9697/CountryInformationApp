@@ -8,6 +8,13 @@
 import Foundation
 import CoreLocation
 
+// MARK: - Data Load Net Status
+enum DataLoadNetworkServiceStatus {
+    case notAttempted
+    case finishedWithError
+    case finishedWithSuccess
+}
+
 // MARK: - Country List
 struct CountryList: Mirrorable, Identifiable {
     let id = UUID().uuidString

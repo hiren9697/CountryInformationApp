@@ -17,19 +17,24 @@ struct CountryListView: View {
             switch viewModel.dataLoadStatus {
             case .notAttempted:
                 EmptyView()
+                    .navigationTitle("Countries")
             case .finishedWithError:
                 Text("Something went wrong")
+                    .navigationTitle("Countries")
             case .finishedWithSuccess:
                 if viewModel.countries.isEmpty {
                     Text("No data found")
+                        .navigationTitle("Countries")
                 } else {
                     List {
-                        ForEach(viewModel.countries,
-                                content: { country in
-                            CountryListItemView(country: country)
+                        ForEach(viewModel.searchCountryListVMs,
+                                content: { vm in
+                            CountryListItemView(vm: vm)
                         })
                     }
                     .listStyle(.plain)
+                    .searchable(text: $viewModel.searchText, prompt: "Search country")
+                    .navigationTitle("Countries")
                 }
             }
         })

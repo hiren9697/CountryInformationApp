@@ -11,14 +11,14 @@ import SDWebImageSwiftUI
 // MARK: - View
 struct CountryListItemView: View {
     
-    let country: CountryList
+    let vm: CountryListItemViewModel
     
     var body: some View {
         HStack() {
-            WebImage(url: country.flagURL)
+            WebImage(url: vm.flagURL)
                 .resizable()
                 .frame(width: 40, height: 30)
-            Text(country.name)
+            Text(vm.name)
                 .font(.custom(AppFont.regular.rawValue,
                               size: 13))
                 .foregroundColor(AppColor.cPrimaryTextColor)
