@@ -99,6 +99,10 @@ struct CountryDetail: Mirrorable {
     let timezones: [String]
     let continents: [String]
     
+    var flagURL: URL? {
+        return URL(string: flagURLString ?? "")
+    }
+    
     init(dictionary: NSDictionary) {
         // 1. name
         if let nameDictionary = dictionary["name"] as? NSDictionary {
@@ -172,17 +176,4 @@ struct CountryDetail: Mirrorable {
         // 14. Continents
         self.continents = dictionary["continents"] as? [String] ?? []
     }
-    
-//    func listPropertiesWithValues(reflect: Mirror? = nil) {
-//            let mirror = reflect ?? Mirror(reflecting: self)
-//            if mirror.superclassMirror != nil {
-//                self.listPropertiesWithValues(reflect: mirror.superclassMirror)
-//            }
-//
-//            for (index, attr) in mirror.children.enumerated() {
-//                if let property_name = attr.label {
-//                    print("\(mirror.description) \(index): \(property_name) = \(attr.value)")
-//                }
-//            }
-//        }
 }

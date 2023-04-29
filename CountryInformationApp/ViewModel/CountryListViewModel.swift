@@ -9,7 +9,7 @@ import Foundation
 import Combine
 
 // MARK: - List Item View Model
-struct CountryListItemViewModel: Identifiable {
+struct CountryListItemViewModel: Identifiable, Hashable {
     let id = UUID().uuidString
     let name: String
     let flagURL: URL?

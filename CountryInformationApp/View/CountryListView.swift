@@ -29,12 +29,19 @@ struct CountryListView: View {
                     List {
                         ForEach(viewModel.searchCountryListVMs,
                                 content: { vm in
-                            CountryListItemView(vm: vm)
+                            NavigationLink(value: vm,
+                                           label: {
+                                CountryListItemView(vm: vm)
+                            })
                         })
                     }
                     .listStyle(.plain)
                     .searchable(text: $viewModel.searchText, prompt: "Search country")
                     .navigationTitle("Countries")
+                    .navigationDestination(for: CountryListItemViewModel.self,
+                                           destination: { vm in
+                        CountryDetailView(viewModel: CountryDetailViewModel(countryName: vm.name))
+                    })
                 }
             }
         })

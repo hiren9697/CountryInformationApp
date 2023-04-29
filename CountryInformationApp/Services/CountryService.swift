@@ -26,7 +26,7 @@ class CountryService {
             return countries
         }
         // API Call
-        guard let url = URL(string: "https://restcountries.com/v3.1/all") else {
+        guard let url = URL(string: "https://restcountries.com/v3.1/all?fields=name,flags,latlng") else {
             return
         }
         URLSession.shared.dataTaskPublisher(for: url)
@@ -38,6 +38,35 @@ class CountryService {
                 Log.apiResponse("API completed: \(completion)")
             } receiveValue: { countries in
                 completion(countries)
+            }
+            .store(in: &bag)
+    }
+    
+    func fetchCountryDetail(name: String, completion: @escaping (CountryDetail)-> Void) {
+        // JSON Parsing
+        func mapToCountryDetail(json: Any)throws-> CountryDetail {
+            guard let arrayDictionary = json as? [NSDictionary],
+                  let firstDictionary = arrayDictionary.first else {
+                throw APIError.parsingError
+            }
+            let countryDetail = CountryDetail(dictionary: firstDictionary)
+            countryDetail.logPropertiesWithValue()
+            return countryDetail
+        }
+        // API Call
+        guard let url = URL(string: "https://restcountries.com/v3.1/name/\(name)") else {
+            return
+        }
+        URLSession.shared.dataTaskPublisher(for: url)
+            .tryMap(validateHTTPURLResponse)
+            .tryMap(mapToJSON)
+            .tryMap(mapToCountryDetail)
+            .receive(on: RunLoop.main)
+            .sink { completion in
+                Log.apiResponse("API completed: \(completion)")
+            } receiveValue: { countries in
+                completion(countries)
+                //Log.info(countries)
             }
             .store(in: &bag)
     }
@@ -60,14 +89,3 @@ extension CountryService {
         return json
     }
 }
-
-//func mapToCountries(json: Any)throws-> [CountryDetail] {
-//    guard let arrayDictionary = json as? [NSDictionary] else {
-//        throw APIError.parsingError
-//    }
-//    var countries: [CountryDetail] = []
-//    for dictionary in arrayDictionary {
-//        countries.append(CountryDetail(dictionary: dictionary))
-//    }
-//    return countries
-//}
