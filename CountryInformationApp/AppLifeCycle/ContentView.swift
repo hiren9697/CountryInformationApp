@@ -14,7 +14,7 @@ struct ContentView: View {
     var body: some View {
         ZStack {
             // 1. App Content
-            CountryListView()
+            TabbarView()
                 .environmentObject(appState)
             // 2. Loader
             if appState.isLoading {

@@ -29,6 +29,7 @@ class CountryService {
         guard let url = URL(string: "https://restcountries.com/v3.1/all?fields=name,flags,latlng") else {
             return
         }
+        logRequest(urlString: url.absoluteString, parameters: nil)
         URLSession.shared.dataTaskPublisher(for: url)
             .tryMap(validateHTTPURLResponse)
             .tryMap(mapToJSON)
@@ -53,10 +54,13 @@ class CountryService {
             countryDetail.logPropertiesWithValue()
             return countryDetail
         }
+        let urlString = "https://restcountries.com/v3.1/name/\(name)".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
+        
         // API Call
-        guard let url = URL(string: "https://restcountries.com/v3.1/name/\(name)") else {
+        guard let url = URL(string: urlString) else {
             return
         }
+        logRequest(urlString: url.absoluteString, parameters: nil)
         URLSession.shared.dataTaskPublisher(for: url)
             .tryMap(validateHTTPURLResponse)
             .tryMap(mapToJSON)
@@ -87,5 +91,9 @@ extension CountryService {
     private func mapToJSON(data: Data)throws-> Any {
         let json = try JSONSerialization.jsonObject(with: data)
         return json
+    }
+    
+    private func logRequest(urlString: String, parameters: [String: Any]?) {
+        Log.apiRequest("URL: \(urlString),\n Parameterns: \(String(describing: parameters))")
     }
 }
