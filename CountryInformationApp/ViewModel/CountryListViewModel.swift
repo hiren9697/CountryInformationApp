@@ -22,14 +22,14 @@ struct CountryListItemViewModel: Identifiable, Hashable {
 
 // MARK: - List View Model
 class CountryListViewModel: ObservableObject {
-    
-    var appState: AppState!
-    let service = CountryService()
-    var bag: Set<AnyCancellable> = Set()
     @Published var countries: [CountryList] = []
     @Published var countryListeItemVMs: [CountryListItemViewModel] = []
     @Published var dataLoadStatus: DataLoadNetworkServiceStatus = .notAttempted
     @Published var searchText = ""
+    var appState: AppState!
+    let service = CountryService()
+    var bag: Set<AnyCancellable> = Set()
+    
     var searchCountryListVMs: [CountryListItemViewModel] {
         let trimmedString = searchText.trimmingCharacters(in: .whitespacesAndNewlines)
         if trimmedString.isEmpty {

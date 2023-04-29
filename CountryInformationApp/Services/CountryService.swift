@@ -12,6 +12,7 @@ import Combine
 class CountryService {
     
     var bag: Set<AnyCancellable> = Set()
+    var countries: [CountryList]?
     
     func fetchCountries(completion: @escaping ([CountryList])-> Void) {
         // JSON Parsing
@@ -25,6 +26,14 @@ class CountryService {
             }
             return countries
         }
+        
+        // Check if countries has already been fetched
+        // if so return cached countries and return
+        if let countries = countries {
+            completion(countries)
+            return
+        }
+        
         // API Call
         guard let url = URL(string: "https://restcountries.com/v3.1/all?fields=name,flags,latlng") else {
             return
@@ -38,6 +47,7 @@ class CountryService {
             .sink { completion in
                 Log.apiResponse("API completed: \(completion)")
             } receiveValue: { countries in
+                self.countries = countries
                 completion(countries)
             }
             .store(in: &bag)

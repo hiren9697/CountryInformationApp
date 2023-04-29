@@ -29,6 +29,13 @@ struct CountryList: Mirrorable, Identifiable {
         return URL(string: flagURLString)
     }
     
+    /// Just for the preview
+    init(name: String, flagURLString: String, coordinates: CLLocationCoordinate2D) {
+        self.name = name
+        self.flagURLString = flagURLString
+        self.coordinates = coordinates
+    }
+    
     init(dictionary: NSDictionary) {
         // 1. name
         if let nameDictionary = dictionary["name"] as? NSDictionary {
