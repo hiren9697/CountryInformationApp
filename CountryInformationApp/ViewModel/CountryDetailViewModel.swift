@@ -20,6 +20,10 @@ class CountryDetailViewModel: ObservableObject {
         self.countryName = countryName
     }
     
+    deinit {
+        Log.deallocate("Deallocated: \(String(describing: self))")
+    }
+    
     func setup(appState: AppState) {
         self.appState = appState
     }

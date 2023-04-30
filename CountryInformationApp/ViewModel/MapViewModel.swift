@@ -31,6 +31,10 @@ class MapViewModel: ObservableObject {
     func setup(appState: AppState) {
         self.appState = appState
     }
+    
+    deinit {
+        Log.deallocate("Deallocated: \(String(describing: self))")
+    }
 }
 
 // MARK: - Web Service

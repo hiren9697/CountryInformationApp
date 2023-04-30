@@ -30,6 +30,10 @@ class CountryListViewModel: ObservableObject {
     let service = CountryService()
     var bag: Set<AnyCancellable> = Set()
     
+    deinit {
+        Log.deallocate("Deallocated: \(String(describing: self))")
+    }
+    
     var searchCountryListVMs: [CountryListItemViewModel] {
         let trimmedString = searchText.trimmingCharacters(in: .whitespacesAndNewlines)
         if trimmedString.isEmpty {

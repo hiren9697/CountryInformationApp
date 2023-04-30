@@ -7,8 +7,8 @@
 
 import SwiftUI
 
+// MARK: - View
 struct CountryListView: View {
-    
     @EnvironmentObject var appState: AppState
     @StateObject var viewModel: CountryListViewModel = CountryListViewModel()
     
@@ -22,26 +22,12 @@ struct CountryListView: View {
                 List {
                     switch viewModel.dataLoadStatus {
                     case .finishedWithError:
-                        NetworkErrorView()
-                            .frame(maxWidth: .infinity)
-                            .padding(.vertical, 100)
-                            .listRowSeparator(.hidden)
-                            .listRowInsets(EdgeInsets(.zero))
+                        networkErrorView
                     case .finishedWithSuccess:
                         if viewModel.countries.isEmpty {
-                            EmptyDataView(message: "Couldn't find any country")
-                                .frame(maxWidth: .infinity)
-                                .padding(.vertical, 100)
-                                .listRowSeparator(.hidden)
-                                .listRowInsets(EdgeInsets(.zero))
+                            emptyDataView
                         } else {
-                            ForEach(viewModel.searchCountryListVMs,
-                                    content: { vm in
-                                NavigationLink(value: vm,
-                                               label: {
-                                    CountryListItemView(vm: vm)
-                                })
-                            })
+                            countryListView
                         }
                     default: Text("Error")
                     }
@@ -67,6 +53,37 @@ struct CountryListView: View {
     }
 }
 
+// MARK: - UI Components
+extension CountryListView {
+    
+    private var emptyDataView: some View {
+        EmptyDataView(message: "Couldn't find any country")
+            .frame(maxWidth: .infinity)
+            .padding(.vertical, 100)
+            .listRowSeparator(.hidden)
+            .listRowInsets(EdgeInsets(.zero))
+    }
+    
+    private var networkErrorView: some View {
+        NetworkErrorView()
+            .frame(maxWidth: .infinity)
+            .padding(.vertical, 100)
+            .listRowSeparator(.hidden)
+            .listRowInsets(EdgeInsets(.zero))
+    }
+    
+    private var countryListView: some View {
+        ForEach(viewModel.searchCountryListVMs,
+                content: { vm in
+            NavigationLink(value: vm,
+                           label: {
+                CountryListItemView(vm: vm)
+            })
+        })
+    }
+}
+
+// MARK: - Preview
 struct CountryListView_Previews: PreviewProvider {
     static var previews: some View {
         CountryListView()
