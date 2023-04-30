@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		4122F845B8A30F4DC91BCDAB /* Pods_CountryInformationApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 800692CB07760DA6FC41EBCE /* Pods_CountryInformationApp.framework */; };
+		872DAE6329FE8F7C00903C50 /* CommonModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 872DAE6229FE8F7C00903C50 /* CommonModel.swift */; };
+		872DAE6529FE902100903C50 /* SelectedCountryInformationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 872DAE6429FE902100903C50 /* SelectedCountryInformationView.swift */; };
 		873E84FA29F226F60053EB40 /* CountryInformationAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 873E84F929F226F60053EB40 /* CountryInformationAppApp.swift */; };
 		873E84FC29F226F60053EB40 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 873E84FB29F226F60053EB40 /* ContentView.swift */; };
 		873E84FE29F226F60053EB40 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 873E84FD29F226F60053EB40 /* Assets.xcassets */; };
@@ -82,6 +84,8 @@
 		7242029A271CB28C6D2512C4 /* Pods_CountryInformationAppTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CountryInformationAppTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		800692CB07760DA6FC41EBCE /* Pods_CountryInformationApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CountryInformationApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		84AE743A1454B9E741D1CE8B /* Pods_CountryInformationApp_CountryInformationAppUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CountryInformationApp_CountryInformationAppUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		872DAE6229FE8F7C00903C50 /* CommonModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonModel.swift; sourceTree = "<group>"; };
+		872DAE6429FE902100903C50 /* SelectedCountryInformationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedCountryInformationView.swift; sourceTree = "<group>"; };
 		873E84F629F226F60053EB40 /* CountryInformationApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CountryInformationApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		873E84F929F226F60053EB40 /* CountryInformationAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryInformationAppApp.swift; sourceTree = "<group>"; };
 		873E84FB29F226F60053EB40 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -282,6 +286,7 @@
 			isa = PBXGroup;
 			children = (
 				87A5A66629F3590E00A6A35C /* CountryModel.swift */,
+				872DAE6229FE8F7C00903C50 /* CommonModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -341,6 +346,7 @@
 			children = (
 				878C2C1129FCF7F500538D99 /* MapView.swift */,
 				878C2C1529FD1C0200538D99 /* CountryMarkerView.swift */,
+				872DAE6429FE902100903C50 /* SelectedCountryInformationView.swift */,
 			);
 			path = Map;
 			sourceTree = "<group>";
@@ -652,6 +658,7 @@
 				87A5A66929F3597900A6A35C /* NSDictionary+Extension.swift in Sources */,
 				873E852F29F230360053EB40 /* CustomErrors.swift in Sources */,
 				87A5A69F29F4068100A6A35C /* CountryDetailView.swift in Sources */,
+				872DAE6329FE8F7C00903C50 /* CommonModel.swift in Sources */,
 				87A5A66729F3590E00A6A35C /* CountryModel.swift in Sources */,
 				87A5A66329F3565500A6A35C /* Log.swift in Sources */,
 				873E84FC29F226F60053EB40 /* ContentView.swift in Sources */,
@@ -659,6 +666,7 @@
 				87A5A69B29F39A2B00A6A35C /* AppState.swift in Sources */,
 				87A5A69D29F39AA800A6A35C /* LoadingView.swift in Sources */,
 				878C2C1429FD16A200538D99 /* MapViewModel.swift in Sources */,
+				872DAE6529FE902100903C50 /* SelectedCountryInformationView.swift in Sources */,
 				878C2C1629FD1C0200538D99 /* CountryMarkerView.swift in Sources */,
 				87A5A66B29F382DA00A6A35C /* Mirror.swift in Sources */,
 				873E84FA29F226F60053EB40 /* CountryInformationAppApp.swift in Sources */,

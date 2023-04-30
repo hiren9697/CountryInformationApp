@@ -20,7 +20,7 @@ struct CountryList: Mirrorable, Identifiable {
     let id = UUID().uuidString
     let name: String
     let flagURLString: String?
-    let coordinates: CLLocationCoordinate2D?
+    let coordinates: CLLocationCoordinate2D
     
     var flagURL: URL? {
         guard let flagURLString = flagURLString else {
@@ -36,7 +36,7 @@ struct CountryList: Mirrorable, Identifiable {
         self.coordinates = coordinates
     }
     
-    init(dictionary: NSDictionary) {
+    init?(dictionary: NSDictionary) {
         // 1. name
         if let nameDictionary = dictionary["name"] as? NSDictionary {
             name = nameDictionary.stringValue(key: "official")
@@ -58,8 +58,20 @@ struct CountryList: Mirrorable, Identifiable {
                                                       longitude: longitude)
             
         } else {
-            self.coordinates = nil
+            return nil
         }
+    }
+}
+
+extension CountryList: Equatable {
+    static func == (lhs: CountryList, rhs: CountryList) -> Bool {
+        lhs.id == rhs.id
+    }
+}
+
+extension CountryList: Hashable {
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
     }
 }
 

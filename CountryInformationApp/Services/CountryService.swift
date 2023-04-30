@@ -22,7 +22,9 @@ class CountryService {
             }
             var countries: [CountryList] = []
             for dictionary in arrayDictionary {
-                countries.append(CountryList(dictionary: dictionary))
+                if let country = CountryList(dictionary: dictionary) {
+                    countries.append(country)
+                }
             }
             return countries
         }

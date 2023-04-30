@@ -10,29 +10,59 @@ import MapKit
 
 // MARK: - MapView
 struct MapView: View {
-    @State private var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 51.507222, longitude: -0.1275), span: MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5))
     @EnvironmentObject var appState: AppState
     @StateObject private var viewModel = MapViewModel()
     
     var body: some View {
-        VStack {
-            if viewModel.countries.isEmpty {
-                EmptyView()
-            } else {
-                Map(coordinateRegion: $region,
-                    annotationItems: viewModel.itemVMs,
-                    annotationContent: { item in
-                    MapAnnotation(coordinate: item.coordinate,
-                                  content: {
-                        CountryMarkerView(viewModel: item)
-                    })
-                })
+        NavigationStack(root: {
+            VStack {
+                if viewModel.countries.isEmpty {
+                    EmptyView()
+                } else {
+                    mapContentView
+                }
             }
-        }
+            .navigationDestination(for: CountryList.self,
+                                   destination: { country in
+                CountryDetailView(viewModel: CountryDetailViewModel(countryName: country.name))
+            })
+        })
         .onAppear(perform: {
             viewModel.setup(appState: appState)
             viewModel.fetchCountries()
         })
+    }
+}
+
+// MARK: - UI Components
+extension MapView {
+    
+    private var mapContentView: some View {
+        ZStack(alignment: .bottom) {
+            // 1. Map
+            Map(coordinateRegion: $viewModel.region,
+                annotationItems: viewModel.countries,
+                annotationContent: { country in
+                MapAnnotation(coordinate: country.coordinates,
+                              content: {
+                    CountryMarkerView(country: country,
+                                      onTapAction: {
+                        viewModel.selectedCountry = country
+                    })
+                        .scaleEffect(country == viewModel.selectedCountry ? 2 : 1)
+                })
+            })
+            // 2. Selected country view
+            if let selectedCountry = viewModel.selectedCountry {
+                NavigationLink(value: selectedCountry,
+                               label: {
+                    SelectedCountryInformationView(country: selectedCountry,
+                                                   onCloseTap: {
+                        viewModel.selectedCountry = nil
+                    })
+                })
+            }
+        }
     }
 }
 

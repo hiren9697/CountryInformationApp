@@ -12,15 +12,24 @@ import SDWebImageSwiftUI
 // MARK: - View
 struct CountryMarkerView: View {
     
-    let viewModel: MapItemViewModel
+    let country: CountryList
+    let onTapAction: VoidCallback
     
     var body: some View {
-        WebImage(url: viewModel.flagURL)
-            .resizable()
-            .scaledToFill()
-            .frame(width: 30, height: 22)
-            .clipShape(RoundedRectangle(cornerRadius: 4))
-            
+        VStack(spacing: -2) {
+            WebImage(url: country.flagURL)
+                .resizable()
+                .scaledToFill()
+                .frame(width: 30, height: 22)
+                .clipShape(RoundedRectangle(cornerRadius: 4))
+                .padding(3)
+                .background(
+                    RoundedRectangle(cornerRadius: 6)
+                )
+            Image(systemName: "arrowtriangle.down.fill")
+                .font(.system(size: 10))
+        }
+        .onTapGesture(perform: onTapAction)
     }
 }
 
@@ -31,6 +40,7 @@ struct CountryMarkerView_Previews: PreviewProvider {
                                       flagURLString: "https://flagcdn.com/w320/hk.png",
                                       coordinates: CLLocationCoordinate2D(latitude: 22.267,
                                                                           longitude: 114.188))
-        CountryMarkerView(viewModel: MapItemViewModel(country: countryList))
+        CountryMarkerView(country: countryList ,
+                          onTapAction: {})
     }
 }

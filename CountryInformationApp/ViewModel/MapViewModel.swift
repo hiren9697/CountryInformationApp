@@ -8,23 +8,33 @@
 import SwiftUI
 import MapKit
 
-// MARK: - Item VM
-struct MapItemViewModel: Identifiable {
-    let id = UUID().uuidString
-    let coordinate: CLLocationCoordinate2D
-    let flagURL: URL?
-    
-    init(country: CountryList) {
-        coordinate = country.coordinates ?? CLLocationCoordinate2D(latitude: 0, longitude: 0)
-        flagURL = country.flagURL
-    }
-}
+//// MARK: - Item VM
+//struct MapItemViewModel: Identifiable, Equatable {
+//    let id = UUID().uuidString
+//    let coordinate: CLLocationCoordinate2D
+//    let flagURL: URL?
+//    let name: String
+//
+//    init(country: CountryList) {
+//        coordinate = country.coordinates ?? CLLocationCoordinate2D(latitude: 0, longitude: 0)
+//        flagURL = country.flagURL
+//        self.name = country.name
+//    }
+//
+//    static func == (lhs: MapItemViewModel, rhs: MapItemViewModel) -> Bool {
+//        lhs.id == rhs.id
+//    }
+//}
 
 // MARK: - Map VM
 class MapViewModel: ObservableObject {
+    @Published var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 23,
+                                                                               longitude: 72),
+                                                span: MKCoordinateSpan(latitudeDelta: 20,
+                                                                       longitudeDelta: 20))
+    @Published var selectedCountry: CountryList?
     @Published var dataLoadStatus: DataLoadNetworkServiceStatus = .notAttempted
     @Published var countries: [CountryList] = []
-    @Published var itemVMs: [MapItemViewModel] = []
     var appState: AppState!
     let service = CountryService()
     
@@ -47,7 +57,6 @@ extension MapViewModel {
             case .success(let countries):
                 self?.dataLoadStatus = .finishedWithSuccess
                 self?.countries = countries
-                self?.itemVMs = countries.map { MapItemViewModel(country: $0) }
             case .failure(let error):
                 Log.error("Encountered error while fetching country list: \(error.localizedDescription)")
                 self?.dataLoadStatus = .finishedWithError
