@@ -22,9 +22,9 @@ struct CountryListItemViewModel: Identifiable, Hashable {
 
 // MARK: - List View Model
 class CountryListViewModel: ObservableObject {
+    @Published var dataLoadStatus: DataLoadNetworkServiceStatus = .notAttempted
     @Published var countries: [CountryList] = []
     @Published var countryListeItemVMs: [CountryListItemViewModel] = []
-    @Published var dataLoadStatus: DataLoadNetworkServiceStatus = .notAttempted
     @Published var searchText = ""
     var appState: AppState!
     let service = CountryService()
@@ -44,14 +44,22 @@ class CountryListViewModel: ObservableObject {
         self.appState = appState
     }
     
-    func fetchData() {
-        appState.isLoading = true
-        service.fetchCountries(completion: {[weak self] countries in
+    func fetchData(showLoader: Bool) {
+        if showLoader {
+            appState.isLoading = true
+        }
+        service.fetchCountries(completion: {[weak self] completion in
             guard let strongSelf = self else { return }
+            switch completion {
+            case .success(let countries):
+                strongSelf.countries = countries
+                strongSelf.countryListeItemVMs = strongSelf.countries.map { CountryListItemViewModel(country: $0) }
+                strongSelf.dataLoadStatus = .finishedWithSuccess
+            case .failure(let error):
+                Log.error("Encountered error while fetching countries: \(error.localizedDescription)")
+                strongSelf.dataLoadStatus = .finishedWithError
+            }
             strongSelf.appState.isLoading = false
-            strongSelf.countries = countries
-            strongSelf.countryListeItemVMs = strongSelf.countries.map { CountryListItemViewModel(country: $0) }
-            strongSelf.dataLoadStatus = .finishedWithSuccess
         })
     }
 }

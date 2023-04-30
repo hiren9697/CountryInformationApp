@@ -14,7 +14,7 @@ class CountryService {
     var bag: Set<AnyCancellable> = Set()
     var countries: [CountryList]?
     
-    func fetchCountries(completion: @escaping ([CountryList])-> Void) {
+    func fetchCountries(completion: @escaping (Result<[CountryList], Error>)-> Void) {
         // JSON Parsing
         func mapToCountries(json: Any)throws-> [CountryList] {
             guard let arrayDictionary = json as? [NSDictionary] else {
@@ -30,7 +30,7 @@ class CountryService {
         // Check if countries has already been fetched
         // if so return cached countries and return
         if let countries = countries {
-            completion(countries)
+            completion(.success(countries))
             return
         }
         
@@ -38,22 +38,28 @@ class CountryService {
         guard let url = URL(string: "https://restcountries.com/v3.1/all?fields=name,flags,latlng") else {
             return
         }
-        logRequest(urlString: url.absoluteString, parameters: nil)
+        
         URLSession.shared.dataTaskPublisher(for: url)
             .tryMap(validateHTTPURLResponse)
             .tryMap(mapToJSON)
             .tryMap(mapToCountries)
             .receive(on: RunLoop.main)
-            .sink { completion in
-                Log.apiResponse("API completed: \(completion)")
+            .sink { result in
+                switch result {
+                case .finished:
+                    Log.apiRequest("Fetch country detail finished successfully")
+                case .failure(let error):
+                    completion(.failure(error))
+                }
             } receiveValue: { countries in
                 self.countries = countries
-                completion(countries)
+                completion(.success(countries))
             }
             .store(in: &bag)
     }
     
-    func fetchCountryDetail(name: String, completion: @escaping (Result<CountryDetail, Error>)-> Void) {
+    func fetchCountryDetail(name: String,
+                            completion: @escaping (Result<CountryDetail, Error>)-> Void) {
         // JSON Parsing
         func mapToCountryDetail(json: Any)throws-> CountryDetail {
             guard let arrayDictionary = json as? [NSDictionary],
@@ -77,8 +83,13 @@ class CountryService {
             .tryMap(mapToJSON)
             .tryMap(mapToCountryDetail)
             .receive(on: RunLoop.main)
-            .sink { completion in
-                Log.apiResponse("API completed: \(completion)")
+            .sink { result in
+                switch result {
+                case .finished:
+                    Log.apiRequest("Fetch country detail finished successfully")
+                case .failure(let error):
+                    completion(.failure(error))
+                }
             } receiveValue: { countries in
                 completion(.success(countries))
             }

@@ -22,6 +22,7 @@ struct MapItemViewModel: Identifiable {
 
 // MARK: - Map VM
 class MapViewModel: ObservableObject {
+    @Published var dataLoadStatus: DataLoadNetworkServiceStatus = .notAttempted
     @Published var countries: [CountryList] = []
     @Published var itemVMs: [MapItemViewModel] = []
     var appState: AppState!
@@ -37,10 +38,17 @@ extension MapViewModel {
     
     func fetchCountries() {
         appState.isLoading = true
-        service.fetchCountries(completion: {[weak self] countries in
+        service.fetchCountries(completion: {[weak self] completion in
+            switch completion {
+            case .success(let countries):
+                self?.dataLoadStatus = .finishedWithSuccess
+                self?.countries = countries
+                self?.itemVMs = countries.map { MapItemViewModel(country: $0) }
+            case .failure(let error):
+                Log.error("Encountered error while fetching country list: \(error.localizedDescription)")
+                self?.dataLoadStatus = .finishedWithError
+            }
             self?.appState.isLoading = false
-            self?.countries = countries
-            self?.itemVMs = countries.map { MapItemViewModel(country: $0) }
         })
     }
 }
