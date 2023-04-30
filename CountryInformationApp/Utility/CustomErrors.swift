@@ -9,6 +9,7 @@ import Foundation
 
 // MARK: - APIError
 enum APIError: Error {
+    case incorrectURL
     case responseError(statusCode: Int)
     case responseCastError
     case parsingError
@@ -17,6 +18,8 @@ enum APIError: Error {
 extension APIError: CustomStringConvertible {
     var description: String {
         switch self {
+        case .incorrectURL:
+            return "Given URL is incorrect"
         case .responseError(let statusCode):
             return "Received wrong status code: \(statusCode)"
         case .responseCastError:
@@ -30,6 +33,8 @@ extension APIError: CustomStringConvertible {
 extension APIError: LocalizedError {
     var errorDescription: String? {
         switch self {
+        case .incorrectURL:
+            return "Something went wrong"
         case .responseError(let _):
             return "Something went wrong"
         case .responseCastError:

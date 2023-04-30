@@ -10,7 +10,8 @@ import Foundation
 // MARK: - VM
 class CountryDetailViewModel: ObservableObject {
     
-    @Published var countryDetail: CountryDetail?
+    @Published var dataLoadStatus: DataLoadNetworkServiceStatus = .notAttempted
+    @Published var countryDetail: CountryDetail!
     let countryName: String
     let service = CountryService()
     var appState: AppState!
@@ -30,9 +31,16 @@ extension CountryDetailViewModel {
     internal func fetchCountryDetail() {
         appState.isLoading = true
         service.fetchCountryDetail(name: countryName,
-                                   completion: {[weak self] countryDetail in
+                                   completion: {[weak self] result in
+            switch result {
+            case .success(let countryDetail):
+                self?.countryDetail = countryDetail
+                self?.dataLoadStatus = .finishedWithSuccess
+            case .failure(let error):
+                Log.error("Encountered error in fetching country detail: \(error.localizedDescription)")
+                self?.dataLoadStatus = .finishedWithError
+            }
             self?.appState.isLoading = false
-            self?.countryDetail = countryDetail
         })
     }
 }

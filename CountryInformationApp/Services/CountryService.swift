@@ -53,7 +53,7 @@ class CountryService {
             .store(in: &bag)
     }
     
-    func fetchCountryDetail(name: String, completion: @escaping (CountryDetail)-> Void) {
+    func fetchCountryDetail(name: String, completion: @escaping (Result<CountryDetail, Error>)-> Void) {
         // JSON Parsing
         func mapToCountryDetail(json: Any)throws-> CountryDetail {
             guard let arrayDictionary = json as? [NSDictionary],
@@ -68,6 +68,7 @@ class CountryService {
         
         // API Call
         guard let url = URL(string: urlString) else {
+            completion(.failure(APIError.incorrectURL))
             return
         }
         logRequest(urlString: url.absoluteString, parameters: nil)
@@ -79,8 +80,7 @@ class CountryService {
             .sink { completion in
                 Log.apiResponse("API completed: \(completion)")
             } receiveValue: { countries in
-                completion(countries)
-                //Log.info(countries)
+                completion(.success(countries))
             }
             .store(in: &bag)
     }

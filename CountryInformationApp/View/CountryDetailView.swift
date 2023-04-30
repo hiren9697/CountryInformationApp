@@ -20,14 +20,13 @@ struct CountryDetailView: View {
     
     var body: some View {
         VStack {
-            if let _ = viewModel.countryDetail {
-                header
-                regionView
-                languagesView
-                currencyView
-                Spacer()
-            } else {
+            switch viewModel.dataLoadStatus {
+            case .notAttempted:
                 EmptyView()
+            case .finishedWithError:
+                NetworkErrorView()
+            case .finishedWithSuccess:
+                dataComponents
             }
         }
         .onAppear(perform: {
@@ -39,6 +38,16 @@ struct CountryDetailView: View {
 
 // MARK: - UI Components
 extension CountryDetailView {
+    
+    private var dataComponents: some View {
+        VStack {
+            header
+            regionView
+            languagesView
+            currencyView
+            Spacer()
+        }
+    }
     
     private var header: some View {
         HStack {
@@ -66,12 +75,14 @@ extension CountryDetailView {
     
     private var regionView: some View {
         HStack {
-            CDRegionView(title: "Capital",
-                         value: viewModel.countryDetail!.capital.first!)
+            if let capital = viewModel.countryDetail?.capital.first {
+                CDRegionView(title: "Capital",
+                             value: capital)
+            }
             CDRegionView(title: "Region",
-                         value: viewModel.countryDetail!.region)
+                         value: viewModel.countryDetail.region)
             CDRegionView(title: "Subregion",
-                         value: viewModel.countryDetail!.subregion)
+                         value: viewModel.countryDetail.subregion)
         }
         .padding()
     }
@@ -88,7 +99,7 @@ extension CountryDetailView {
                       content: {
                 ForEach(0 ..< viewModel.countryDetail!.langugues.count,
                         content: { index in
-                    CDGridItemView(text: viewModel.countryDetail!.langugues[index])
+                    CDGridItemView(text: viewModel.countryDetail.langugues[index])
                 })
             })
             .frame(maxWidth: .infinity)
@@ -106,9 +117,9 @@ extension CountryDetailView {
                       GridItem(.flexible(), spacing: 10, alignment: .center),
                       GridItem(.flexible(), spacing: 10, alignment: .center)],
                       content: {
-                ForEach(0 ..< viewModel.countryDetail!.currencies.count,
+                ForEach(0 ..< viewModel.countryDetail.currencies.count,
                         content: { index in
-                    CDGridItemView(text: viewModel.countryDetail!.currencies[index].name)
+                    CDGridItemView(text: viewModel.countryDetail.currencies[index].name)
                 })
             })
             .frame(maxWidth: .infinity)
