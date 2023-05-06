@@ -8,33 +8,25 @@
 import SwiftUI
 import MapKit
 
-//// MARK: - Item VM
-//struct MapItemViewModel: Identifiable, Equatable {
-//    let id = UUID().uuidString
-//    let coordinate: CLLocationCoordinate2D
-//    let flagURL: URL?
-//    let name: String
-//
-//    init(country: CountryList) {
-//        coordinate = country.coordinates ?? CLLocationCoordinate2D(latitude: 0, longitude: 0)
-//        flagURL = country.flagURL
-//        self.name = country.name
-//    }
-//
-//    static func == (lhs: MapItemViewModel, rhs: MapItemViewModel) -> Bool {
-//        lhs.id == rhs.id
-//    }
-//}
-
 // MARK: - Map VM
 class MapViewModel: ObservableObject {
     @Published var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 23,
                                                                                longitude: 72),
                                                 span: MKCoordinateSpan(latitudeDelta: 20,
                                                                        longitudeDelta: 20))
-    @Published var selectedCountry: CountryList?
+    @Published var searchText: String = "" {
+        didSet {
+            updateSearchedCountries()
+        }
+    }
+    @Published var selectedCountry: CountryList? {
+        didSet {
+            updateMapRegion()
+        }
+    }
     @Published var dataLoadStatus: DataLoadNetworkServiceStatus = .notAttempted
     @Published var countries: [CountryList] = []
+    @Published var searchedCountries: [CountryList] = []
     var appState: AppState!
     let service = CountryService()
     
@@ -44,6 +36,32 @@ class MapViewModel: ObservableObject {
     
     deinit {
         Log.deallocate("Deallocated: \(String(describing: self))")
+    }
+}
+
+// MARK: - Helper method(s)
+extension MapViewModel {
+    
+    private func updateSearchedCountries() {
+        let trimmedString = searchText.trimmingCharacters(in: .whitespacesAndNewlines)
+        if trimmedString.isEmpty {
+            searchedCountries = []
+        } else {
+            let lowercasedSearchText = searchText.lowercased()
+            searchedCountries = countries.filter({ $0.name.lowercased().contains(lowercasedSearchText) })
+        }
+    }
+    
+    private func updateMapRegion() {
+        guard let selectedCountry = selectedCountry else {
+            return
+        }
+        let span = MKCoordinateSpan(latitudeDelta: 20,
+                                    longitudeDelta: 20)
+        withAnimation {
+            self.region = MKCoordinateRegion(center: selectedCountry.coordinates,
+                                        span: span)
+        }
     }
 }
 

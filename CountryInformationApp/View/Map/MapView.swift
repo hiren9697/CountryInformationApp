@@ -46,21 +46,39 @@ extension MapView {
                 MapAnnotation(coordinate: country.coordinates,
                               content: {
                     CountryMarkerView(country: country,
+                                      isSelected: viewModel.selectedCountry == country,
                                       onTapAction: {
-                        viewModel.selectedCountry = country
+                        withAnimation {
+                            viewModel.selectedCountry = country
+                        }
                     })
                         .scaleEffect(country == viewModel.selectedCountry ? 2 : 1)
+                        .animation(.default,
+                                   value: country == viewModel.selectedCountry ? 2 : 1)
                 })
             })
-            // 2. Selected country view
-            if let selectedCountry = viewModel.selectedCountry {
-                NavigationLink(value: selectedCountry,
-                               label: {
-                    SelectedCountryInformationView(country: selectedCountry,
-                                                   onCloseTap: {
-                        viewModel.selectedCountry = nil
-                    })
+            VStack {
+                // 2. Search
+                MapSearchView(searchedCountries: $viewModel.searchedCountries,
+                              searchText: $viewModel.searchText,
+                              onSelect: { country in
+                    withAnimation {
+                        viewModel.selectedCountry = country
+                    }
                 })
+                Spacer()
+                // 3. Selected country view
+                if let selectedCountry = viewModel.selectedCountry {
+                    NavigationLink(value: selectedCountry,
+                                   label: {
+                        SelectedCountryInformationView(country: selectedCountry,
+                                                       onCloseTap: {
+                            withAnimation {
+                                viewModel.selectedCountry = nil
+                            }
+                        })
+                    })
+                }
             }
         }
     }
@@ -70,5 +88,6 @@ extension MapView {
 struct MapView_Previews: PreviewProvider {
     static var previews: some View {
         MapView()
+            .environmentObject(AppState())
     }
 }

@@ -58,6 +58,8 @@
 		87A5A69B29F39A2B00A6A35C /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A5A69A29F39A2B00A6A35C /* AppState.swift */; };
 		87A5A69D29F39AA800A6A35C /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A5A69C29F39AA800A6A35C /* LoadingView.swift */; };
 		87A5A69F29F4068100A6A35C /* CountryDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A5A69E29F4068100A6A35C /* CountryDetailView.swift */; };
+		87A8A29D2A061CB9000A2880 /* MapSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A8A29C2A061CB9000A2880 /* MapSearchView.swift */; };
+		87A8A29F2A06233F000A2880 /* MapSearchItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A8A29E2A06233F000A2880 /* MapSearchItemView.swift */; };
 		DE4050E5B1950E2B292C80BA /* Pods_CountryInformationAppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7242029A271CB28C6D2512C4 /* Pods_CountryInformationAppTests.framework */; };
 		EA2C93938CB3D6340198D930 /* Pods_CountryInformationApp_CountryInformationAppUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84AE743A1454B9E741D1CE8B /* Pods_CountryInformationApp_CountryInformationAppUITests.framework */; };
 /* End PBXBuildFile section */
@@ -138,6 +140,8 @@
 		87A5A69A29F39A2B00A6A35C /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		87A5A69C29F39AA800A6A35C /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		87A5A69E29F4068100A6A35C /* CountryDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryDetailView.swift; sourceTree = "<group>"; };
+		87A8A29C2A061CB9000A2880 /* MapSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapSearchView.swift; sourceTree = "<group>"; };
+		87A8A29E2A06233F000A2880 /* MapSearchItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapSearchItemView.swift; sourceTree = "<group>"; };
 		97667FD447CFBF87AC422CBA /* Pods-CountryInformationApp-CountryInformationAppUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CountryInformationApp-CountryInformationAppUITests.release.xcconfig"; path = "Target Support Files/Pods-CountryInformationApp-CountryInformationAppUITests/Pods-CountryInformationApp-CountryInformationAppUITests.release.xcconfig"; sourceTree = "<group>"; };
 		A23CF1841260B4AE589EE6E5 /* Pods-CountryInformationAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CountryInformationAppTests.debug.xcconfig"; path = "Target Support Files/Pods-CountryInformationAppTests/Pods-CountryInformationAppTests.debug.xcconfig"; sourceTree = "<group>"; };
 		B29CE64F3F62C1FADBA7D4AC /* Pods-CountryInformationAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CountryInformationAppTests.release.xcconfig"; path = "Target Support Files/Pods-CountryInformationAppTests/Pods-CountryInformationAppTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -347,6 +351,8 @@
 				878C2C1129FCF7F500538D99 /* MapView.swift */,
 				878C2C1529FD1C0200538D99 /* CountryMarkerView.swift */,
 				872DAE6429FE902100903C50 /* SelectedCountryInformationView.swift */,
+				87A8A29C2A061CB9000A2880 /* MapSearchView.swift */,
+				87A8A29E2A06233F000A2880 /* MapSearchItemView.swift */,
 			);
 			path = Map;
 			sourceTree = "<group>";
@@ -659,9 +665,11 @@
 				873E852F29F230360053EB40 /* CustomErrors.swift in Sources */,
 				87A5A69F29F4068100A6A35C /* CountryDetailView.swift in Sources */,
 				872DAE6329FE8F7C00903C50 /* CommonModel.swift in Sources */,
+				87A8A29F2A06233F000A2880 /* MapSearchItemView.swift in Sources */,
 				87A5A66729F3590E00A6A35C /* CountryModel.swift in Sources */,
 				87A5A66329F3565500A6A35C /* Log.swift in Sources */,
 				873E84FC29F226F60053EB40 /* ContentView.swift in Sources */,
+				87A8A29D2A061CB9000A2880 /* MapSearchView.swift in Sources */,
 				8786A96429FE69C900CFC5C0 /* View+Extension.swift in Sources */,
 				87A5A69B29F39A2B00A6A35C /* AppState.swift in Sources */,
 				87A5A69D29F39AA800A6A35C /* LoadingView.swift in Sources */,

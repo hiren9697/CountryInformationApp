@@ -19,6 +19,7 @@ struct AppColor {
     static let cPurpleRed: Color = Color("cPurpleRed")
     static let cRose: Color = Color("cRose")
     static let cYellow: Color = Color("cYellow")
+    static let cLightGray: Color = Color("cLightGray")
     //static let cCharcole: UIColor = UIColor(named: "charcole")!
     
     static let cPrimaryBackground: Color = Color("cPrimaryBackground")

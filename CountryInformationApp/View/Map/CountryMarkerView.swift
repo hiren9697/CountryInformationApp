@@ -13,6 +13,7 @@ import SDWebImageSwiftUI
 struct CountryMarkerView: View {
     
     let country: CountryList
+    let isSelected: Bool
     let onTapAction: VoidCallback
     
     var body: some View {
@@ -25,9 +26,11 @@ struct CountryMarkerView: View {
                 .padding(3)
                 .background(
                     RoundedRectangle(cornerRadius: 6)
+                        .fill(isSelected ? Color.green : Color.gray)
                 )
             Image(systemName: "arrowtriangle.down.fill")
                 .font(.system(size: 10))
+                .foregroundColor(isSelected ? Color.green : Color.gray)
         }
         .onTapGesture(perform: onTapAction)
     }
@@ -41,6 +44,7 @@ struct CountryMarkerView_Previews: PreviewProvider {
                                       coordinates: CLLocationCoordinate2D(latitude: 22.267,
                                                                           longitude: 114.188))
         CountryMarkerView(country: countryList ,
+                          isSelected: false,
                           onTapAction: {})
     }
 }
