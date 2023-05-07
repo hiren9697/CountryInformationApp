@@ -19,14 +19,16 @@ struct CountryDetailView: View {
     }
     
     var body: some View {
-        VStack {
-            switch viewModel.dataLoadStatus {
-            case .notAttempted:
-                EmptyView()
-            case .finishedWithError:
-                NetworkErrorView()
-            case .finishedWithSuccess:
-                dataComponents
+        ScrollView {
+            VStack {
+                switch viewModel.dataLoadStatus {
+                case .notAttempted:
+                    EmptyView()
+                case .finishedWithError:
+                    NetworkErrorView()
+                case .finishedWithSuccess:
+                    dataComponents
+                }
             }
         }
         .onAppear(perform: {
@@ -50,27 +52,53 @@ extension CountryDetailView {
     }
     
     private var header: some View {
-        HStack {
+        
+        var image: some View {
             WebImage(url: viewModel.countryDetail!.flagURL)
                 .resizable()
-                .frame(width: 150, height: 110)
-            Spacer()
-            VStack(spacing: 11) {
+                .frame(maxWidth: .infinity)
+                .aspectRatio(1.5, contentMode: .fill)
+                .padding(.bottom, 30)
+        }
+        
+        var nameAndPopulationView: some View {
+            VStack(alignment: .leading) {
                 Text(viewModel.countryDetail!.name)
-                    .font(.custom(AppFont.bold.rawValue, size: 20))
+                    .font(.custom(AppFont.bold.rawValue, size: 30))
                     .foregroundColor(AppColor.cPrimaryTextColor)
                 HStack {
                     Text("Population")
                         .font(.custom(AppFont.regular.rawValue, size: 14))
-                        .foregroundColor(AppColor.cSecondaryTextColor)
-                    Text("\(viewModel.countryDetail!.population)")
+                        .foregroundColor(AppColor.cPrimaryTextColor)
+                    Text("\(viewModel.countryDetail!.population.smallFormat)")
                         .font(.custom(AppFont.regular.rawValue, size: 14))
                         .foregroundColor(AppColor.cPrimaryTextColor)
                 }
-                
             }
+            .padding(.horizontal)
+            .frame(maxWidth: .infinity, alignment: .leading)
         }
-        .padding()
+        
+        var gradientView: some View {
+            Rectangle()
+                .fill(
+                    LinearGradient(
+                        gradient: Gradient(colors: [.clear, .white]),
+                        startPoint: .top,
+                        endPoint: .bottom
+                    )
+                )
+                .frame(maxWidth: .infinity)
+                .frame(height: 100)
+                .padding(.bottom, 30)
+        }
+        
+        return ZStack(alignment: .bottomLeading) {
+            image
+            gradientView
+            nameAndPopulationView
+            
+        }
     }
     
     private var regionView: some View {

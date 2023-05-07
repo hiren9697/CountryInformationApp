@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		4122F845B8A30F4DC91BCDAB /* Pods_CountryInformationApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 800692CB07760DA6FC41EBCE /* Pods_CountryInformationApp.framework */; };
+		872335ED2A076A3F008D1208 /* Double+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 872335EC2A076A3F008D1208 /* Double+Extension.swift */; };
 		872DAE6329FE8F7C00903C50 /* CommonModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 872DAE6229FE8F7C00903C50 /* CommonModel.swift */; };
 		872DAE6529FE902100903C50 /* SelectedCountryInformationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 872DAE6429FE902100903C50 /* SelectedCountryInformationView.swift */; };
 		873E84FA29F226F60053EB40 /* CountryInformationAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 873E84F929F226F60053EB40 /* CountryInformationAppApp.swift */; };
@@ -60,6 +61,8 @@
 		87A5A69F29F4068100A6A35C /* CountryDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A5A69E29F4068100A6A35C /* CountryDetailView.swift */; };
 		87A8A29D2A061CB9000A2880 /* MapSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A8A29C2A061CB9000A2880 /* MapSearchView.swift */; };
 		87A8A29F2A06233F000A2880 /* MapSearchItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A8A29E2A06233F000A2880 /* MapSearchItemView.swift */; };
+		87A8A2A12A06A536000A2880 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A8A2A02A06A536000A2880 /* Constants.swift */; };
+		87A8A2A42A06A574000A2880 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A8A2A32A06A574000A2880 /* String+Extension.swift */; };
 		DE4050E5B1950E2B292C80BA /* Pods_CountryInformationAppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7242029A271CB28C6D2512C4 /* Pods_CountryInformationAppTests.framework */; };
 		EA2C93938CB3D6340198D930 /* Pods_CountryInformationApp_CountryInformationAppUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84AE743A1454B9E741D1CE8B /* Pods_CountryInformationApp_CountryInformationAppUITests.framework */; };
 /* End PBXBuildFile section */
@@ -86,6 +89,7 @@
 		7242029A271CB28C6D2512C4 /* Pods_CountryInformationAppTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CountryInformationAppTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		800692CB07760DA6FC41EBCE /* Pods_CountryInformationApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CountryInformationApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		84AE743A1454B9E741D1CE8B /* Pods_CountryInformationApp_CountryInformationAppUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CountryInformationApp_CountryInformationAppUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		872335EC2A076A3F008D1208 /* Double+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Extension.swift"; sourceTree = "<group>"; };
 		872DAE6229FE8F7C00903C50 /* CommonModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonModel.swift; sourceTree = "<group>"; };
 		872DAE6429FE902100903C50 /* SelectedCountryInformationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedCountryInformationView.swift; sourceTree = "<group>"; };
 		873E84F629F226F60053EB40 /* CountryInformationApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CountryInformationApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -142,6 +146,8 @@
 		87A5A69E29F4068100A6A35C /* CountryDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryDetailView.swift; sourceTree = "<group>"; };
 		87A8A29C2A061CB9000A2880 /* MapSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapSearchView.swift; sourceTree = "<group>"; };
 		87A8A29E2A06233F000A2880 /* MapSearchItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapSearchItemView.swift; sourceTree = "<group>"; };
+		87A8A2A02A06A536000A2880 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		87A8A2A32A06A574000A2880 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		97667FD447CFBF87AC422CBA /* Pods-CountryInformationApp-CountryInformationAppUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CountryInformationApp-CountryInformationAppUITests.release.xcconfig"; path = "Target Support Files/Pods-CountryInformationApp-CountryInformationAppUITests/Pods-CountryInformationApp-CountryInformationAppUITests.release.xcconfig"; sourceTree = "<group>"; };
 		A23CF1841260B4AE589EE6E5 /* Pods-CountryInformationAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CountryInformationAppTests.debug.xcconfig"; path = "Target Support Files/Pods-CountryInformationAppTests/Pods-CountryInformationAppTests.debug.xcconfig"; sourceTree = "<group>"; };
 		B29CE64F3F62C1FADBA7D4AC /* Pods-CountryInformationAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CountryInformationAppTests.release.xcconfig"; path = "Target Support Files/Pods-CountryInformationAppTests/Pods-CountryInformationAppTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -315,13 +321,13 @@
 		873E852929F22BD90053EB40 /* Utility */ = {
 			isa = PBXGroup;
 			children = (
-				87A5A66829F3597900A6A35C /* NSDictionary+Extension.swift */,
-				8786A96329FE69C900CFC5C0 /* View+Extension.swift */,
+				87A8A2A22A06A555000A2880 /* Extensions */,
 				87A5A66229F3565500A6A35C /* Log.swift */,
 				873E852E29F230360053EB40 /* CustomErrors.swift */,
 				87A5A66A29F382DA00A6A35C /* Mirror.swift */,
 				87A5A69429F38EE300A6A35C /* AppFonts.swift */,
 				87A5A69629F38F0700A6A35C /* AppColors.swift */,
+				87A8A2A02A06A536000A2880 /* Constants.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -388,6 +394,17 @@
 				87A5A67E29F38E2C00A6A35C /* SF-Pro-Text-SemiboldItalic.otf */,
 			);
 			path = Fonts;
+			sourceTree = "<group>";
+		};
+		87A8A2A22A06A555000A2880 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				87A5A66829F3597900A6A35C /* NSDictionary+Extension.swift */,
+				8786A96329FE69C900CFC5C0 /* View+Extension.swift */,
+				87A8A2A32A06A574000A2880 /* String+Extension.swift */,
+				872335EC2A076A3F008D1208 /* Double+Extension.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		F758F7B3EF4F9207B5B95764 /* Frameworks */ = {
@@ -662,6 +679,8 @@
 				87A5A69929F394F900A6A35C /* CountryListItemView.swift in Sources */,
 				873E852D29F22C790053EB40 /* CountryService.swift in Sources */,
 				87A5A66929F3597900A6A35C /* NSDictionary+Extension.swift in Sources */,
+				87A8A2A12A06A536000A2880 /* Constants.swift in Sources */,
+				872335ED2A076A3F008D1208 /* Double+Extension.swift in Sources */,
 				873E852F29F230360053EB40 /* CustomErrors.swift in Sources */,
 				87A5A69F29F4068100A6A35C /* CountryDetailView.swift in Sources */,
 				872DAE6329FE8F7C00903C50 /* CommonModel.swift in Sources */,
@@ -684,6 +703,7 @@
 				8786A96229FE3DF600CFC5C0 /* EmptyDataView.swift in Sources */,
 				873E852B29F22C1A0053EB40 /* CountryListView.swift in Sources */,
 				878C2C1029FCF7D700538D99 /* TabbarView.swift in Sources */,
+				87A8A2A42A06A574000A2880 /* String+Extension.swift in Sources */,
 				87A5A66529F356B900A6A35C /* CountryListViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
