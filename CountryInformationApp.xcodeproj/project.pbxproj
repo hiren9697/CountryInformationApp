@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		4122F845B8A30F4DC91BCDAB /* Pods_CountryInformationApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 800692CB07760DA6FC41EBCE /* Pods_CountryInformationApp.framework */; };
+		87043B202D10790D00D0AB45 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 87043B1F2D10790D00D0AB45 /* README.md */; };
 		872335ED2A076A3F008D1208 /* Double+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 872335EC2A076A3F008D1208 /* Double+Extension.swift */; };
 		872DAE6329FE8F7C00903C50 /* CommonModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 872DAE6229FE8F7C00903C50 /* CommonModel.swift */; };
 		872DAE6529FE902100903C50 /* SelectedCountryInformationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 872DAE6429FE902100903C50 /* SelectedCountryInformationView.swift */; };
@@ -89,6 +90,7 @@
 		7242029A271CB28C6D2512C4 /* Pods_CountryInformationAppTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CountryInformationAppTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		800692CB07760DA6FC41EBCE /* Pods_CountryInformationApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CountryInformationApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		84AE743A1454B9E741D1CE8B /* Pods_CountryInformationApp_CountryInformationAppUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CountryInformationApp_CountryInformationAppUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		87043B1F2D10790D00D0AB45 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		872335EC2A076A3F008D1208 /* Double+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Extension.swift"; sourceTree = "<group>"; };
 		872DAE6229FE8F7C00903C50 /* CommonModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonModel.swift; sourceTree = "<group>"; };
 		872DAE6429FE902100903C50 /* SelectedCountryInformationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedCountryInformationView.swift; sourceTree = "<group>"; };
@@ -199,6 +201,7 @@
 		873E84ED29F226F60053EB40 = {
 			isa = PBXGroup;
 			children = (
+				87043B1F2D10790D00D0AB45 /* README.md */,
 				873E84F829F226F60053EB40 /* CountryInformationApp */,
 				873E850929F226F60053EB40 /* CountryInformationAppTests */,
 				873E851329F226F70053EB40 /* CountryInformationAppUITests */,
@@ -546,6 +549,7 @@
 				87A5A68529F38E2C00A6A35C /* SF-Pro-Text-Black.otf in Resources */,
 				87A5A68729F38E2C00A6A35C /* SF-Pro-Text-Ultralight.otf in Resources */,
 				87A5A69029F38E2C00A6A35C /* SF-Pro-Text-Medium.otf in Resources */,
+				87043B202D10790D00D0AB45 /* README.md in Resources */,
 				87A5A68E29F38E2C00A6A35C /* SF-Pro-Text-HeavyItalic.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
